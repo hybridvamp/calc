@@ -21,66 +21,99 @@
             --text-color: #333;
             --btn-color: #ddd;
             --btn-hover: #bbb;
+            --btn-active: #aaa;
         }
         .dark {
             --bg-color: #222;
             --text-color: #fff;
             --btn-color: #444;
             --btn-hover: #666;
+            --btn-active: #888;
         }
         .calculator {
-            width: 320px;
+            width: 360px;
             padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
             background: var(--btn-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
         .display {
             width: 100%;
-            height: 60px;
+            height: 70px;
             text-align: right;
             font-size: 2rem;
             padding: 10px;
             border: none;
             background: var(--bg-color);
             color: var(--text-color);
-            border-radius: 5px;
+            border-radius: 10px;
+            box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2);
         }
         .buttons {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 10px;
-            margin-top: 10px;
+            margin-top: 15px;
         }
         button {
-            padding: 15px;
+            padding: 20px;
             font-size: 1.5rem;
             border: none;
-            border-radius: 5px;
+            border-radius: 10px;
             cursor: pointer;
             background: var(--btn-color);
             color: var(--text-color);
             transition: 0.3s;
+            box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
         }
         button:hover {
             background: var(--btn-hover);
         }
+        button:active {
+            background: var(--btn-active);
+        }
         .history {
-            margin-top: 10px;
-            font-size: 0.9rem;
-            max-height: 100px;
+            margin-top: 15px;
+            font-size: 1rem;
+            max-height: 150px;
             overflow-y: auto;
             background: var(--bg-color);
-            padding: 5px;
-            border-radius: 5px;
+            padding: 10px;
+            border-radius: 10px;
+            width: 100%;
+            text-align: left;
         }
         .theme-toggle {
-            margin-top: 10px;
-            cursor: pointer;
-            padding: 10px;
-            text-align: center;
-            border-radius: 5px;
+            margin-top: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .theme-switch {
+            width: 50px;
+            height: 25px;
             background: var(--btn-color);
+            border-radius: 15px;
+            position: relative;
+            cursor: pointer;
+        }
+        .theme-switch::before {
+            content: "";
+            width: 20px;
+            height: 20px;
+            background: white;
+            position: absolute;
+            top: 50%;
+            left: 5px;
+            transform: translateY(-50%);
+            border-radius: 50%;
+            transition: 0.3s;
+        }
+        .dark .theme-switch::before {
+            left: 25px;
         }
     </style>
 </head>
@@ -109,7 +142,10 @@
             <button onclick="calculate()">=</button>
         </div>
         <div class="history" id="history"></div>
-        <div class="theme-toggle" onclick="toggleTheme()">Toggle Theme</div>
+        <div class="theme-toggle">
+            <span>Dark Mode</span>
+            <div class="theme-switch" onclick="toggleTheme()"></div>
+        </div>
     </div>
     <script>
         let history = [];
